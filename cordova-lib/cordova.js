@@ -885,7 +885,12 @@ function readConfig (success, error) {
         xhr.open('get', '/config.xml', true);
         xhr.send();
     } catch (e) {
-        fail('[Electron][cordova.js][readConfig] Could not XHR config.xml: ' + JSON.stringify(e));
+        try {
+            xhr.open('get', 'config.xml', true);
+            xhr.send();
+        } catch (e) {
+            fail('[Electron][cordova.js][readConfig] Could not XHR config.xml: ' + JSON.stringify(e));
+        }
     }
 }
 
